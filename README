@@ -1,0 +1,24 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4817
+
+*increment-activator* is a powerful increment plugin.
+
+The behavior is like <C-a>, <C-x> increment or decrement number by the default Vim
+
+It has been enhanced to allow increment the list that you have defined.
+
+The list will be generated in candidates patterns automatically.
+
+Pattern of candidates:
+- no changes (that you have defined)
+- lower
+- UPPER
+- Capitalize
+
+Screen shots:
+- https://dl.dropboxusercontent.com/u/26664139/vim/snapshot_IncrementActivator.gif
+
+Latest version:
+https://github.com/nishigori/increment-activator
+
+Document:
+https://raw.github.com/nishigori/increment-activator/master/doc/vim-increment-activator.txt
