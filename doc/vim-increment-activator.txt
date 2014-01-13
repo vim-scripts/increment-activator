@@ -55,14 +55,33 @@ Getting Manual:
 INTERFACE                                      *increment-activator-interface*
 
 ------------------------------------------------------------------------------
+FUNCTIONS                                      *increment-activator-functions*
+
+increment_activator#increment()                *increment_activator#increment*
+	Apply to increment currently word.
+
+increment_activator#decrement()                *increment_activator#decrement*
+	Apply to decrement currently word.
+
+					*increment_activator#candidates#clear*
+increment_activator#candidates#generate({filetype})
+
+increment_activator#candidates#clear()  *increment_activator#candidates#clear*
+	Clear to generated candidates of all.
+
+------------------------------------------------------------------------------
 VARIABLES                                      *increment-activator-variables*
 
 g:increment_activator#config			*g:increment-activator_config*
 	Type of dictionary.
 	Keys is <filetype> ('_' is filetype of all).
 	Value is lists (nested the list).
-	The priorities that candidate for increment or decrement is
-	current filetype as the first, '_' key as the second.
+
+	The candidates for priority is -
+
+	1. Current filetype (`&filetype`)
+	2. `_` key (`_` is special as apply to all filetypes)
+	3. number by default Vim
 
 	Example:
 >
@@ -122,60 +141,66 @@ g:increment_activator_no_default_candidates
 g:increment_activator_no_default_key_mappings
 			*g:increment_activator_no_default_key_mappings*
 	This plugin will define the following key mapping automatically.
-	If you don't want there key mappings,
+	If you don't want there key mappings (<C-a>, <C-x>),
 	define |g:increment_activator_no_default_key_mappings| to 1.
 	before this plugin loaded.
 >
-	let g:increment_activator#no_default_key_mappings = 1
+	let g:increment_activator_no_default_key_mappings = 1
 <
 	Defaults to 0.
 
 ------------------------------------------------------------------------------
 KEY MAPPINGS                                *increment-activator-key-mappings*
 
-				*increment_activator#increment()*
-increment-activator#increment()
-		increment current word (like <cword>).
+This plugin will define the following |Normal-mode| key map automatically.
+In other |mode()|, you must define key maps.
 
-				*increment_activator#decrement()*
-increment-activator#decrement()
-		decrement current word (like <cword>).
+Example for custom key mappings:
+>
+	" Normal-mode: customized
+	let g:increment_activator_no_default_key_mappings = 1
+	nmap <silent> ab <Plug>(increment-activator-increment)
+	nmap <silent> az <Plug>(increment-activator-decrement)
+
+	" Insert-mode
+	imap <silent> <C-a> <Plug>(increment-activator-increment)
+	imap <silent> <C-x> <Plug>(increment-activator-decrement)
+<
+
+<Plug>(increment-activator-increment)  *<Plug>(increment-activator-increment)*
+		Applies to increment currently word.
+		It supports on |Normal-mode|, |Insert-mode|.
+
+<Plug>(increment-activator-decrement)  *<Plug>(increment-activator-decrement)*
+		Applies to decrement currently word.
+		It supports on |Normal-mode|, |Insert-mode|.
 
 ==============================================================================
 ISSUES                                            *increment-activator-issues*
 
-*increment-activator* is under the management of Github.
+This plugin is under the management of Github.
 
 https://github.com/nishigori/increment-activator/issues
 
-Are you having any the problem ? Please add issue XD
-
-Hope to include the following checklist to ensure pull-request description.
->
-	| Q             | A
-	| ------------- | --------
-	| Bug fix?      | [yes|no]
-	| New feature?  | [yes|no]
-	| BC breaks?    | [yes|no]
-	| Deprecations? | [yes|no]
-	| Doc PR        | [The reference to the documentation PR if any]
+Are you having any the problem, question, or idea ? Please add issue !!
 >
 ==============================================================================
 CHANGLOG                                       *increment-activator-changelog*
 
-To get the diff for a specific change,
-go to -
-https://github.com/nishigori/increment-activator/commit/XXX where XXX is
-the change hash To get the diff between two versions,
-go to -
+To get the diff between two versions, go to -
 https://github.com/nishigori/increment-activator/compare/VERSION...VERSION
 
-0.0.1: First Release
+0.0.2	Tue Jan 14 08:02:55 2014 +0900	*increment-activator-cahngelog-0.0.2*
+	- Support insert-mode
+	- Fix E154 'duplicate tag 'increment-activator'
 
-- Feature inherited https://github.com/nishigori/vim-sunday
-- Support candidates of filetype definition
-- define able no use default key mappings
-- define able no use candidates created by plugin
+0.0.1	Sat Jan 4 06:24:23 2014 +0900	*increment-activator-changelog-0.0.1*
+	- First release.
+	- Feature inherited https://github.com/nishigori/vim-sunday
+	- Support candidates of filetype definition
+	- define able no use default key mappings
+	- define able no use candidates created by plugin
+
 
 ==============================================================================
 LICENSE                                          *increment-activator-license*

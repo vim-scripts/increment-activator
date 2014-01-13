@@ -1,4 +1,8 @@
-# IncrementActivator.vim [![Build Status](https://travis-ci.org/nishigori/increment-activator.png?branch=master)](https://travis-ci.org/nishigori/increment-activator) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nishigori/increment-activator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+# IncrementActivator.vim
+
+[![Build Status](https://travis-ci.org/nishigori/increment-activator.png?branch=master)](https://travis-ci.org/nishigori/increment-activator)
+[![Stories in Ready](http://badge.waffle.io/nishigori/increment-activator.png)](http://waffle.io/nishigori/increment-activator)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nishigori/increment-activator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 The [Vim] powerful increment plugin
 
@@ -21,6 +25,28 @@ NeoBundle 'nishigori/increment-activator'
 If you hope to do other approach, Please read more [Documentation](doc/vim-increment-activator.txt)
 
 ## Usage
+
+### Kay map
+
+On **Normal-mode**, This plugin defines the following key mapping automatically `<C-a>` & `<C-x>`
+
+If you don't want there key mappings, please write on vimrc
+
+```viml
+let g:increment_activator_no_default_key_mappings = 1
+
+" e.g) Original key mappings
+nmap ab <Plug>(increment-activator-increment)
+nmap az <Plug>(increment-activator-decrement)
+```
+
+If you want to be enabled to other `mode()`, please define map like this.
+
+```viml
+" Be enabled on insert-mode
+imap <silent> <C-a> <Plug>(increment-activator-increment)
+imap <silent> <C-x> <Plug>(increment-activator-decrement)
+```
 
 ### Case of candidates for increment
 
@@ -53,9 +79,11 @@ You can define original list for increment / decrement :)
 
 Type of `g:increment_activator#config` is dict. each key is Vim's filetype.
 
-`_` is special as apply to all filetypes
+The candidates for priority is -
 
-The priorities candidate for increment, current filetype as the first, `_` key as the second.
+1. Current filetype (`&filetype`)
+2. `_` key (`_` is special as apply to all filetypes)
+3. number by default Vim
 
 *Example $MYVIMRC:*
 
@@ -93,9 +121,7 @@ let g:increment_activator#config = {
   \ }
 ```
 
-### More than
-
-Please read more [Documentation](doc/vim-increment-activator.txt)
+More than, Please read [Documentation](doc/vim-increment-activator.txt)
 
 ## Author
 
