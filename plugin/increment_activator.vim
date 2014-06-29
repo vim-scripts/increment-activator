@@ -37,29 +37,36 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Global options definition " {{{
-let g:increment_activator#config = get(g:, 'increment_activator#config', {})
+if exists('g:increment_activator#config')
+  let s:deprecated_msg = 'g:increment_activator#config is deprecated.'
+    \ . ' Please use g:increment_activator_filetype_candidates.'
+  echohl WarningMsg | echomsg s:deprecated_msg | echohl None
+endif
 
+" Global options definition " {{{
 let g:increment_activator_no_default_candidates =
   \ get(g:, 'increment_activator_no_default_candidates', 0)
 let g:increment_activator_no_default_key_mappings =
   \ get(g:, 'increment_activator_no_default_key_mappings', 0)
+
+let g:increment_activator_filetype_candidates =
+  \ get(g:, 'increment_activator_filetype_candidates', {})
 " }}}
 
 " Default Key mapping {{{
+nnoremap <silent> <Plug>(increment-activator-increment)
+  \ :<C-u>call increment_activator#increment()<CR>
+nnoremap <silent> <Plug>(increment-activator-decrement)
+  \ :<C-u>call increment_activator#decrement()<CR>
+inoremap <silent> <Plug>(increment-activator-increment)
+  \ <C-o>:<C-u>call increment_activator#increment()<CR>
+inoremap <silent> <Plug>(increment-activator-decrement)
+  \ <C-o>:<C-u>call increment_activator#decrement()<CR>
+
 if !g:increment_activator_no_default_key_mappings
   nmap <silent> <C-a> <Plug>(increment-activator-increment)
   nmap <silent> <C-x> <Plug>(increment-activator-decrement)
 endif
-
-nnoremap <silent> <Plug>(increment-activator-increment)
-  \ :call increment_activator#increment()<CR>
-nnoremap <silent> <Plug>(increment-activator-decrement)
-  \ :call increment_activator#decrement()<CR>
-inoremap <silent> <Plug>(increment-activator-increment)
-  \ <C-o>:call increment_activator#increment()<CR>
-inoremap <silent> <Plug>(increment-activator-decrement)
-  \ <C-o>:call increment_activator#decrement()<CR>
 " }}}
 
 let g:loaded_increment_activator = 1
